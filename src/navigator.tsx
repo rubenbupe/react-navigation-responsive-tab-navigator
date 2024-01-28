@@ -75,6 +75,18 @@ function ResponsiveTabNavigator ({
 						</SafeAreaInsetsContext.Consumer>
 					</View>
 				}
+
+				<View
+					style={[
+						{ flex: 1, width: '100%' }
+					]}>
+					<BottomTabView
+						tabBar={(props) => null}
+						state={state}
+						navigation={navigation}
+						descriptors={descriptors as any}
+					/>
+				</View>
 				
 				{BottomTabMenuComponent == null && (
 					<View style={{
