@@ -25,7 +25,7 @@ export interface ResponsiveTabNavigationConfig {
 	 * @type 'bottom' | 'side'
 	 *
 	 */
-	responsiveMode?: 'bottom' | 'side'
+	mode?: 'bottom' | 'side'
 
 	/*
 	 * The drawer component to use for the responsive tab navigator.

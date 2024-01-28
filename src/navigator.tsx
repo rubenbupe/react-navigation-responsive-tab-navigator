@@ -29,7 +29,7 @@ function ResponsiveTabNavigator ({
 	bottomTabMenu,
 	drawerContent,
 	drawerStyle,
-	responsiveMode = 'bottom'
+	mode = 'bottom'
 }: ResponsiveTabNavigationProps) {
 	const { state, navigation, descriptors, NavigationContent } =
 		useNavigationBuilder<
@@ -60,7 +60,7 @@ function ResponsiveTabNavigator ({
 						style={[
 							{ width: '20%' },
 							drawerStyle,
-							{ display: responsiveMode === 'side' ? 'flex' : 'none' }
+							{ display: mode === 'side' ? 'flex' : 'none' }
 						]}
 					>
 						<SafeAreaInsetsContext.Consumer>
@@ -87,7 +87,7 @@ function ResponsiveTabNavigator ({
 					/>
 				</View>
 			</View>
-			{responsiveMode === 'bottom' && BottomTabMenuComponent == null && (
+			{mode === 'bottom' && BottomTabMenuComponent == null && (
 				<SafeAreaInsetsContext.Consumer>
 					{(insets) => (
 						<BottomTabBar
@@ -100,7 +100,7 @@ function ResponsiveTabNavigator ({
 				</SafeAreaInsetsContext.Consumer>
 			)}
 
-			{responsiveMode === 'bottom' && (
+			{mode === 'bottom' && (
 				<View style={{}}>
 					<SafeAreaInsetsContext.Consumer>
 						{(insets) => {
