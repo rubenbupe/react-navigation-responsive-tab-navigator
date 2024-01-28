@@ -52,7 +52,7 @@ function ResponsiveTabNavigator ({
 			<View
 				style={{
 					flex: 1,
-					flexDirection: 'row'
+					flexDirection: mode === 'bottom' ? 'column' : 'row'
 				}}
 			>
 				{
@@ -75,56 +75,49 @@ function ResponsiveTabNavigator ({
 						</SafeAreaInsetsContext.Consumer>
 					</View>
 				}
-				<View
-					style={[
-						{ flex: 1, width: '100%' }
-					]}>
-					<BottomTabView
-						tabBar={(props) => null}
-						state={state}
-						navigation={navigation}
-						descriptors={descriptors as any}
-					/>
-				</View>
+				
+				{BottomTabMenuComponent == null && (
+					<View style={{
+						display: mode === 'bottom' ? 'flex' : 'none',
+					}}>
+						<SafeAreaInsetsContext.Consumer>
+							{(insets) => (
+								<BottomTabBar
+									state={state}
+									navigation={navigation}
+									descriptors={descriptors as any}
+									insets={insets as any}
+								/>
+							)}
+						</SafeAreaInsetsContext.Consumer>
+					</View>
+				)}
+					<View style={{
+						display: mode === 'bottom' ? 'flex' : 'none',
+					}}>
+						<SafeAreaInsetsContext.Consumer>
+							{(insets) => {
+								return BottomTabMenuComponent != null
+									? (
+										<BottomTabMenuComponent
+											state={state}
+											navigation={navigation}
+											descriptors={descriptors as any}
+											insets={insets as any}
+										/>
+									)
+									: (
+										<BottomTabBar
+											state={state}
+											navigation={navigation}
+											descriptors={descriptors as any}
+											insets={insets as any}
+										/>
+									)
+							}}
+						</SafeAreaInsetsContext.Consumer>
+					</View>
 			</View>
-			{mode === 'bottom' && BottomTabMenuComponent == null && (
-				<SafeAreaInsetsContext.Consumer>
-					{(insets) => (
-						<BottomTabBar
-							state={state}
-							navigation={navigation}
-							descriptors={descriptors as any}
-							insets={insets as any}
-						/>
-					)}
-				</SafeAreaInsetsContext.Consumer>
-			)}
-
-			{mode === 'bottom' && (
-				<View style={{}}>
-					<SafeAreaInsetsContext.Consumer>
-						{(insets) => {
-							return BottomTabMenuComponent != null
-								? (
-									<BottomTabMenuComponent
-										state={state}
-										navigation={navigation}
-										descriptors={descriptors as any}
-										insets={insets as any}
-									/>
-								)
-								: (
-									<BottomTabBar
-										state={state}
-										navigation={navigation}
-										descriptors={descriptors as any}
-										insets={insets as any}
-									/>
-								)
-						}}
-					</SafeAreaInsetsContext.Consumer>
-				</View>
-			)}
 		</NavigationContent>
 	)
 }
